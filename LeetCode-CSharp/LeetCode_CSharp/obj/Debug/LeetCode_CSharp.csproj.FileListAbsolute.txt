@@ -1,0 +1,6 @@
+d:\users\c_mao\documents\visual studio 2013\Projects\LeetCode-CSharp\LeetCode_CSharp\bin\Debug\LeetCode_CSharp.exe.config
+d:\users\c_mao\documents\visual studio 2013\Projects\LeetCode-CSharp\LeetCode_CSharp\bin\Debug\LeetCode_CSharp.exe
+d:\users\c_mao\documents\visual studio 2013\Projects\LeetCode-CSharp\LeetCode_CSharp\bin\Debug\LeetCode_CSharp.pdb
+d:\users\c_mao\documents\visual studio 2013\Projects\LeetCode-CSharp\LeetCode_CSharp\obj\Debug\LeetCode_CSharp.csprojResolveAssemblyReference.cache
+d:\users\c_mao\documents\visual studio 2013\Projects\LeetCode-CSharp\LeetCode_CSharp\obj\Debug\LeetCode_CSharp.exe
+d:\users\c_mao\documents\visual studio 2013\Projects\LeetCode-CSharp\LeetCode_CSharp\obj\Debug\LeetCode_CSharp.pdb
