@@ -35,11 +35,123 @@ namespace LeetCode_CSharp
             //    R2LTraverse(root);
             // 1, 2, 3, null, null, 4, null, null, 5
             //1,2,3,#,#,4,#,#,5
-            Console.WriteLine(LevelOrderBottom(TreeNodeConvert(new object[] { 1, 2, 3, null, null, 4, null, null, 5 })));
+
+            PlusOne(new int[] { 9, 8, 2, 1, 3, 3, 1, 8, 1, 4, 4, 7, 2, 7, 2, 0, 5, 6, 8, 9, 7, 7, 4, 3 });
+            Console.WriteLine();
         }
 
 
         #region Collapse
+
+        public static int RemoveElement(int[] nums, int val)
+        {
+            if (nums.Length == 0) return 0;
+            int i = 0, j = nums.Length - 1;
+            while (i < j)
+            {
+                while (i < j && nums[i] != val) ++i;
+                while (i < j && nums[j] == val) --j;
+                if (nums[i] == val && nums[j] != val)
+                    Swap(nums, i, j);
+            }
+
+            return nums[i] == val ? i : i + 1;
+        }
+
+        public static IList<IList<int>> LevelOrderBottom(TreeNode root)
+        {
+            var m = new List<IList<int>>();
+            if (root == null) return m;
+
+            var s = new Stack<int>();
+            var s1 = new Queue<TreeNode>();
+            s1.Enqueue(root);
+            s1.Enqueue(null);
+            s.Push(root.val);
+            s.Push(int.MinValue);
+
+            while (s1.Count != 0)
+            {
+                var item = s1.Dequeue();
+                if (item == null)
+                {
+                    if (s1.Count == 0) break;
+                    else
+                    {
+                        s.Push(int.MinValue);
+                        s1.Enqueue(null);
+                        continue;
+                    }
+                }
+                if (item.right != null)
+                {
+                    s1.Enqueue(item.right);
+                    s.Push(item.right.val);
+                }
+                if (item.left != null)
+                {
+                    s1.Enqueue(item.left);
+                    s.Push(item.left.val);
+                }
+            }
+
+            var m1 = new List<int>();
+            while (s.Count != 0)
+            {
+                var i = s.Pop();
+                if (i != int.MinValue)
+                    m1.Add(i);
+                else if (m1.Count != 0)
+                {
+                    m.Add(m1);
+                    m1 = new List<int>();
+                }
+            }
+
+            if (m1.Count != 0)
+                m.Add(m1);
+
+            return m;
+        }
+
+        /// <summary>
+        /// Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+        /// Do not allocate extra space for another array, you must do this in place with constant memory.
+        /// For example,
+        /// Given input array nums = [1,1,2],
+        /// Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the new length.
+        /// Subscribe to see which companies asked this question
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+
+            var i = 1;
+            var p = nums[0];
+            var markArr = new bool[nums.Length];
+            markArr[0] = false;
+
+            while (i < nums.Length)
+            {
+                if (nums[i] == p)
+                    markArr[i] = true;
+                p = nums[i++];
+            }
+
+            i = 1;
+            var m = 1;
+            while (i < markArr.Length)
+            {
+                if (!markArr[i])
+                    nums[m++] = nums[i];
+                ++i;
+            }
+
+            return m;
+        }
+
         public static bool IsSymmetric(TreeNode root)
         {
             if (root == null) return true;
@@ -571,77 +683,34 @@ namespace LeetCode_CSharp
         }
         #endregion
 
-
-        public static int RemoveElement(int[] nums, int val)
+        /// <summary>
+        /// Given a non-negative number represented as an array of digits, plus one to the number.
+        /// The digits are stored such that the most significant digit is at the head of the list.
+        /// </summary>
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public static int[] PlusOne(int[] digits)
         {
-            if (nums.Length == 0) return 0;
-            int i = 0, j = nums.Length - 1;
-            while (i < j)
+            int p = digits.Length - 1;
+
+            while (p >= 0)
             {
-                while (i < j && nums[i] != val) ++i;
-                while (i < j && nums[j] == val) --j;
-                if (nums[i] == val && nums[j] != val)
-                    Swap(nums, i, j);
+
+                if (digits[p] < 9)
+                    digits[p] += 1;
+                else digits[p] = 0;
+
+                if (digits[p] != 0) return digits;
+
+                --p;
             }
 
-            return nums[i] == val ? i : i + 1;
-        }
+            var newArr = new int[digits.Length+1];
+            newArr[0] = 1;
+            for(var k=0;k<digits.Length;++k)
+                newArr[k+1]=digits[k];
 
-
-        public static IList<IList<int>> LevelOrderBottom(TreeNode root)
-        {
-            var m = new List<IList<int>>();
-            if (root == null) return m;
-
-            var s = new Stack<int>();
-            var s1 = new Queue<TreeNode>();
-            s1.Enqueue(root);
-            s1.Enqueue(null);
-            s.Push(root.val);
-            s.Push(int.MinValue);
-
-            while (s1.Count != 0)
-            {
-                var item = s1.Dequeue();
-                if (item == null)
-                {
-                    if (s1.Count == 0) break;
-                    else
-                    {
-                        s.Push(int.MinValue);
-                        s1.Enqueue(null);
-                        continue;
-                    }
-                }
-                if (item.right != null)
-                {
-                    s1.Enqueue(item.right);
-                    s.Push(item.right.val);
-                }
-                if (item.left != null)
-                {
-                    s1.Enqueue(item.left);
-                    s.Push(item.left.val);
-                }
-            }
-
-            var m1 = new List<int>();
-            while (s.Count != 0)
-            {
-                var i = s.Pop();
-                if (i != int.MinValue)
-                    m1.Add(i);
-                else if (m1.Count != 0)
-                {
-                    m.Add(m1);
-                    m1 = new List<int>();
-                }
-            }
-
-            if (m1.Count != 0)
-                m.Add(m1);
-
-            return m;
+            return newArr;
         }
 
         public static TreeNode TreeNodeConvert(object[] arr)
