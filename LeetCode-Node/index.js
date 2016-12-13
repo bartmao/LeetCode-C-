@@ -4,8 +4,9 @@ var add2Nums = require('./add2Nums.js');
 var lengthOfLongestSubstring = require('./lengthOfLongestSubstring.js');
 var binarySearch = require('./binarySearch.js');
 var findMedianSortedArrays = require('./findMedianSortedArrays.js');
+var convert = require('./convert.js');
 
-console.log(findMedianSortedArrays([5],[1,2,3,4,6,7,8,9]));
+console.log(convert('PAYPALISHRING',3));
 
 
 // function getNode(arr) {
