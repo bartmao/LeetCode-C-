@@ -5,8 +5,9 @@ var lengthOfLongestSubstring = require('./lengthOfLongestSubstring.js');
 var binarySearch = require('./binarySearch.js');
 var findMedianSortedArrays = require('./findMedianSortedArrays.js');
 var convert = require('./convert.js');
+var reverse = require('./reverse.js');
 
-console.log(convert('PAYPALISHRING',3));
+console.log(reverse(1534236469));
 
 
 // function getNode(arr) {
